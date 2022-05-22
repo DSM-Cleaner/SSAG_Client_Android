@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">alseulsanjap</string>
+    <string name="ssag">쓰윽싹</string>
+    <string name="login">로그인</string>
+    <string name="student_certification">학생 고유코드</string>
+    <string name="certification_code">제공해드린 고유 코드를 입력해주세요</string>
+    <string name="certification_code_login">인증번호로 로그인</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="incorrect_code">고유코드가 일치하지 않습니다.</string>
+</resources>
