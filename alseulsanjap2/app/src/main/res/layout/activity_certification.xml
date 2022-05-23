@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.alseulsanjap.CertificationViewModel"
+            type="com.example.alseulsanjap.certification.CertificationViewModel"
             />
     </data>
 
@@ -67,14 +67,13 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.1" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:backgroundTint="#DEDEDE"
+            android:backgroundTint="#3774E0"
             android:text="@string/certification_code_login"
             android:textSize="14dp"
-            android:onClick="@{()->vm.checkCertificationCode()}"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
