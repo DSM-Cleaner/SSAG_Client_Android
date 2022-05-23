@@ -7,7 +7,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface SsagAPI {
-    @GET("/user")
+    @GET("/user/login")
     suspend fun doCertification(
         @Body code: CertificationRequest
     ): Response<CertificationResponse>

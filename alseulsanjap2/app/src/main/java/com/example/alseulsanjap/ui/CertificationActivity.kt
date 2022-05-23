@@ -2,16 +2,18 @@ package com.example.alseulsanjap.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.example.alseulsanjap.CertificationViewModel
+import com.example.alseulsanjap.certification.CertificationViewModel
 import com.example.alseulsanjap.R
+import com.example.alseulsanjap.databinding.ActivityCertificationBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CertificationActivity : AppCompatActivity() {
 
     private val certificationViewModel: CertificationViewModel by viewModel()
-
+    private lateinit var binding: ActivityCertificationBinding
     val successfragment = SuccessFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +21,14 @@ class CertificationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_certification)
 
         suceessLogin()
+        onClickLogin()
+    }
+
+    private fun onClickLogin(){
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener(){
+           certificationViewModel.checkCertificationCode()
+        }
     }
 
     fun suceessLogin() {
@@ -29,12 +39,10 @@ class CertificationActivity : AppCompatActivity() {
                     .replace(R.id.success_container, successfragment)
                     .commit()
 
-                //visible
-                val visible : TextView = findViewById(R.id.textView5)
+                val visible: TextView = findViewById(R.id.textView5)
                 visible.visibility
             }
             toastMessage.observe(this@CertificationActivity, {
-                //토스트 띄워주기
                 Toast.makeText(this@CertificationActivity, it, Toast.LENGTH_SHORT).show()
             })
         }

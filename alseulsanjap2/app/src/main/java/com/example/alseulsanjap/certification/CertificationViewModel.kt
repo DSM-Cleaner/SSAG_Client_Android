@@ -1,12 +1,16 @@
-package com.example.alseulsanjap
+package com.example.alseulsanjap.certification
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.alseulsanjap.CertificationImpl
+import com.example.alseulsanjap.CertificationRequest
+import com.example.alseulsanjap.CertificationResponse
+import com.example.alseulsanjap.SharedPreferenceStorage
+import com.example.alseulsanjap.di.SsagApplication
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class CertificationViewModel : ViewModel() {
 
@@ -27,20 +31,19 @@ class CertificationViewModel : ViewModel() {
 
     fun checkCertificationCode() {
         viewModelScope.launch {
-            val response = certificationRespository.doCertification(CertificationRequest(userCode.value!!))
+            val response =
+                certificationRespository.doCertification(CertificationRequest(userCode.value!!))
             if (response.isSuccessful) {
-                    //유저 아이디 저장
-                     Log.e("postrequest",userCode.value!!)
-                     Log.e("response",response.body()!!.id)
+                //유저 아이디 저장
+                Log.e("postrequest", userCode.value!!)
+                Log.e("response", response.body()!!.id)
 
-                    _successCertification.value == true
+                _successCertification.value == true
+                _toastMessage.value = "인증에 성공하였습니다."
 
-                    prefs.saveInfo(response.body()!!.authorization,"authorization")
-                    prefs.saveInfo(response.body()!!.id,"id")
+                prefs.saveInfo(response.body()!!.authorization, "authorization")
+                prefs.saveInfo(response.body()!!.id, "id")
 
-                    //_toastMessage.value = "인증에 성공하였습니다."
-                    // 성공시 intent
-                    //_successCertification.value == true
             }
         }
     }
