@@ -1,6 +1,5 @@
 package com.example.alseulsanjap.certification
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,26 +24,26 @@ class CertificationViewModel : ViewModel() {
     val response = _response
     val successCertification = _successCertification
 
+
+    private val _successAddProject = MutableLiveData<Boolean>()
+    val successAddProject: LiveData<Boolean> get() = _successAddProject
+
+    val userCode2 = "dssakdjfklsajdf"
     val userCode = MutableLiveData<String>()
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
     fun checkCertificationCode() {
         viewModelScope.launch {
-            val response =
-                certificationRespository.doCertification(CertificationRequest(userCode.value!!))
+            val response = certificationRespository.doCertification(CertificationRequest(userCode.value!!))
             if (response.isSuccessful) {
-                //유저 아이디 저장
-                Log.e("postrequest", userCode.value!!)
-                Log.e("response", response.body()!!.id)
-
-                _successCertification.value == true
                 _toastMessage.value = "인증에 성공하였습니다."
-
+                _successCertification.value == true
                 prefs.saveInfo(response.body()!!.authorization, "authorization")
                 prefs.saveInfo(response.body()!!.id, "id")
 
             }
+
         }
     }
 }

@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.CertificationActivity">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -71,9 +70,10 @@
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:backgroundTint="#3774E0"
+            android:backgroundTint="#C1CCDB"
             android:text="@string/certification_code_login"
             android:textSize="14dp"
+            android:onClick="@{()->vm.checkCertificationCode()}"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
@@ -124,6 +124,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/button" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
