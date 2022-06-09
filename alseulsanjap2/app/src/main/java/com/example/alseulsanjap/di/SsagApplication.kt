@@ -14,7 +14,8 @@ class SsagApplication : Application() {
             modules(
                 listOf(
                     certificationModule,
-                    mainModule
+                    mainModule,
+                    resultModule
                 )
             )
         }
