@@ -27,7 +27,7 @@ class SharedPreferenceStorage(private val context: Context) {
         editor.apply()
     }
 
-    fun saveInfo(info: Int, content: String) {
+    fun saveStudentIdInfo(info: Int, content: String) {
         if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = pref!!.edit()
         editor.putInt(content, info)
