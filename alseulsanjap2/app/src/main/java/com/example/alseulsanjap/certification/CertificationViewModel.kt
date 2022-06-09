@@ -31,9 +31,6 @@ class CertificationViewModel : ViewModel() {
     private val _doneLogin = MutableLiveData(false)
     val doneLogin: LiveData<Boolean> get() = _doneLogin
 
-    private val _successAddProject = MutableLiveData<Boolean>()
-    val successAddProject: LiveData<Boolean> get() = _successAddProject
-
     val userCode = MutableLiveData<String>()
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
@@ -61,6 +58,7 @@ class CertificationViewModel : ViewModel() {
 //            }
 //        }
 //    }
+
     fun checkCertificationCode() {
         viewModelScope.launch {
             val response =
@@ -71,7 +69,7 @@ class CertificationViewModel : ViewModel() {
 
                     _doneLogin.value = true
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
-                    prefs.saveInfo(response.body()!!.id, "id")
+                    prefs.saveStudentIdInfo(response.body()!!.id, "id")
                 }
             }
             else
