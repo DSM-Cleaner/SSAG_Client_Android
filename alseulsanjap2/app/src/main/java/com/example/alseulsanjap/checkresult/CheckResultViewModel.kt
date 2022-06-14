@@ -1,5 +1,6 @@
 package com.example.alseulsanjap.checkresult
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,21 +31,26 @@ class CheckResultViewModel : ViewModel() {
     private val _clothes = MutableLiveData<Int>()
     val clothes : LiveData<Int> get() = _clothes
 
+
     fun getCleanInfo(){
         viewModelScope.launch {
-            val response = checkRepository.getCleanWeekData(prefs.getInfo("authorization"),prefs.getInfo("id"))
-            if(response.isSuccessful){
-                if(response.code() == 200){
+            Log.e(prefs.getInt("id",0),"1111122222")
+
+            //val response = checkRepository.getCleanWeekData(prefs.getInfo("authorization"),studentId)
+
+//            if(response.isSuccessful){
+//                if(response.code() == 200){
+//                    Log.e(response.body()!!.bed,"success")
 
                     //이번주의 청소 점검 상태 확인하기
-                     _bedding.value = response.body()!!.results[].bedding
-                     if(_bedding.value == 0){
+//                     _bedding.value = response.body()!!.results[].bedding
+//                     if(_bedding.value == 0){
                          //0이면 통과
-                     }
-                    else
+                   //  }
+//                    else
                         //1이면 불통과
 
-                    _clothes.value = response
+                    //_clothes.value = response
 
 
 
@@ -57,10 +63,10 @@ class CheckResultViewModel : ViewModel() {
                     _nowDate.value = onlyDate.toString()
 
                 }
-            }
-            else
-                _toastMessage.value = "데이터 로드에 실패하였습니다"
-        }
+//            }
+//            else
+//                _toastMessage.value = "데이터 로드에 실패하였습니다"
+//        }
     }
 
     fun checkWeekCleanRoom(){
