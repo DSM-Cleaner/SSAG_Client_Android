@@ -14,11 +14,14 @@ class SharedPreferenceStorage(private val context: Context) {
             pref!!.getString(content, "").toString()
     }
 
-    fun getNotBearerInfo(content: String?): String {
-        if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
-        return pref!!.getString(content, "").toString()
+    fun getInt(key: String, defValue: Int): String {
+        return pref!!.getString(key, defValue.toString()).toString()
     }
 
+
+    fun setInt(key: String, str: Int) {
+        pref!!.edit().putString(key, str.toString()).apply()
+    }
 
     fun saveInfo(info: String, content: String) {
         if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
