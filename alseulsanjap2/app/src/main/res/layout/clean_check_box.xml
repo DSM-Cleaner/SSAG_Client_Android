@@ -74,7 +74,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/front_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -84,14 +84,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView23"
+                        android:id="@+id/personal_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                        app:layout_constraintTop_toBottomOf="@+id/front_tv" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -151,7 +151,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
                     <TextView
-                        android:id="@+id/textView24"
+                        android:id="@+id/light_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -161,24 +161,24 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/concent_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                        app:layout_constraintTop_toBottomOf="@+id/light_tv" />
 
                     <TextView
-                        android:id="@+id/textView26"
+                        android:id="@+id/shoes_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="TextView"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                        app:layout_constraintTop_toBottomOf="@+id/concent_tv" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -219,7 +219,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView27"
+                        android:id="@+id/self_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
@@ -234,7 +234,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@={vm.nowDate}"
                     android:textColor="@color/color_dark_blue"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
