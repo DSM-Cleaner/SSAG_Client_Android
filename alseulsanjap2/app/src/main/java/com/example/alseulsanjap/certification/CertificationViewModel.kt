@@ -2,6 +2,7 @@ package com.example.alseulsanjap.certification
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,7 +70,10 @@ class CertificationViewModel : ViewModel() {
 
                     _doneLogin.value = true
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
-                    prefs.saveStudentIdInfo(response.body()!!.id, "id")
+                    prefs.setInt("id",response.body()!!.id)
+
+                    Log.e(prefs.getInt("id",0),"제발제발제발")
+
                 }
             }
             else

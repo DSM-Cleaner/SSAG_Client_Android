@@ -51,8 +51,6 @@ class CertificationActivity :
     }
 
 
-
-
     private fun successCertification() {
         vm.doneLogin.observe(this, {
             if (vm.doneLogin.value == true) {
