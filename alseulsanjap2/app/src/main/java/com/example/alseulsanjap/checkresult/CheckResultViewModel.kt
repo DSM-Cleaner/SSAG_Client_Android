@@ -31,30 +31,32 @@ class CheckResultViewModel : ViewModel() {
     private val _clothes = MutableLiveData<Int>()
     val clothes : LiveData<Int> get() = _clothes
 
+    private val _studentId = MutableLiveData<Int>()
+    val studentId : LiveData<Int> get() = _studentId
 
-    fun getCleanInfo(){
+    private val _studentName = MutableLiveData<String>()
+    val studentName : LiveData<String> get() = _studentName
+
+    private val _doneGetInfo = MutableLiveData(false)
+    val doneGetInfo: LiveData<Boolean> get() = _doneGetInfo
+
+
+    fun getCleanInfo() {
         viewModelScope.launch {
-            Log.e(prefs.getInt("id",0),"1111122222")
+            val studentId = prefs.getInfo("id")
+            val studentIntId: Int = studentId.toInt()
 
-            //val response = checkRepository.getCleanWeekData(prefs.getInfo("authorization"),studentId)
+            val response =
+                checkRepository.getCleanWeekData(prefs.getInfo("authorization"), studentIntId)
 
-//            if(response.isSuccessful){
-//                if(response.code() == 200){
-//                    Log.e(response.body()!!.bed,"success")
+            if (response.isSuccessful) {
+                if (response.code() == 200) {
+                    _doneGetInfo.value = true
 
-                    //이번주의 청소 점검 상태 확인하기
-//                     _bedding.value = response.body()!!.results[].bedding
-//                     if(_bedding.value == 0){
-                         //0이면 통과
-                   //  }
-//                    else
-                        //1이면 불통과
+                    _studentId.value = response!!.body()!!.gcn
+                    _studentName.value = response!!.body()!!.name
 
-                    //_clothes.value = response
-
-
-
-
+                    Log.e(studentId,"studentiddidididid")
 
 
                     //날짜 가지고 오기
@@ -62,18 +64,23 @@ class CheckResultViewModel : ViewModel() {
                     println("Current date: $onlyDate")
                     _nowDate.value = onlyDate.toString()
 
+
+
+
+
+
                 }
-//            }
-//            else
-//                _toastMessage.value = "데이터 로드에 실패하였습니다"
-//        }
-    }
+                else
+                    _toastMessage.value = "데이터 로드에 실패하였습니다"
+            } else
+                _toastMessage.value = "데이터 로드에 실패하였습니다"
+        }
 
-    fun checkWeekCleanRoom(){
-        viewModelScope.launch {
+        fun checkWeekCleanRoom() {
+            viewModelScope.launch {
 
+            }
         }
     }
-
 
 }
