@@ -9,7 +9,7 @@ interface SsagAPI {
         @Body code: CertificationRequest
     ): Response<CertificationResponse>
 
-    @GET("/cleaning/{student_id}")
+    @GET("/cleaning/student/{student_id}")
     suspend fun getCleanWeekData(
         @Header("Authorization") accessToken : String,
         @Path("student_id") student_id :Int
