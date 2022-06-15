@@ -8,6 +8,8 @@
             name="vm"
             type="com.example.alseulsanjap.certification.CertificationViewModel"
             />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="60dp"
-            android:background="@drawable/box"
+            android:background="@drawable/compact_box"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
