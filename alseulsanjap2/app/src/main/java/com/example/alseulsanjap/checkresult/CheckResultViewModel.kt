@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alseulsanjap.CheckResultImpl
 import com.example.alseulsanjap.CheckResultRequest
+import com.example.alseulsanjap.CleanWeekResponse
 import com.example.alseulsanjap.SharedPreferenceStorage
 import com.example.alseulsanjap.di.SsagApplication
 import kotlinx.coroutines.launch
@@ -40,6 +41,14 @@ class CheckResultViewModel : ViewModel() {
     private val _doneGetInfo = MutableLiveData(false)
     val doneGetInfo: LiveData<Boolean> get() = _doneGetInfo
 
+    private val _getDataInfo: MutableLiveData<CleanWeekResponse> = MutableLiveData()
+    val getDataInfo  = _getDataInfo
+
+    private val _getUserName : MutableLiveData<String> = MutableLiveData()
+    val getUserName = _getUserName
+
+    private var userName : String = ""
+
 
     fun getCleanInfo() {
         viewModelScope.launch {
@@ -52,21 +61,16 @@ class CheckResultViewModel : ViewModel() {
             if (response.isSuccessful) {
                 if (response.code() == 200) {
                     _doneGetInfo.value = true
+                    _getDataInfo.postValue(response.body())
 
-                    _studentId.value = response!!.body()!!.gcn
-                    _studentName.value = response!!.body()!!.name
+                    _getUserName.postValue(response.body()!!.name)
 
-                    Log.e(studentId,"studentiddidididid")
-
+                    _getDataInfo.value!!.results[0].bedding
 
                     //날짜 가지고 오기
                     val onlyDate: LocalDate = LocalDate.now()
                     println("Current date: $onlyDate")
                     _nowDate.value = onlyDate.toString()
-
-
-
-
 
 
                 }

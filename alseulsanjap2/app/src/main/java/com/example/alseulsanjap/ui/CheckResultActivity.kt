@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.alseulsanjap.BaseActivity
 import com.example.alseulsanjap.R
+import com.example.alseulsanjap.WeekCleanAdapter
 import com.example.alseulsanjap.checkresult.CheckResultViewModel
 import com.example.alseulsanjap.databinding.ActivityCheckResultBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,26 +16,39 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.activity_check_result) {
 
     override val vm: CheckResultViewModel by viewModel()
+    private val weekCleanAdapter by lazy { WeekCleanAdapter(vm) }
+
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
-    private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
+    private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         vm.getCleanInfo()
+        successGetData()
 
 //        binding.viewPager2.adapter =
-//            binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//            binding.viewager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 //        binding.viewPager2.setPageTransformer(ZoomOutPageTransformer())
-
-        binding.textView7.text = vm.studentName.value.toString()
-        binding.textView8.text = vm.studentId.value.toString()
-
-
+//        binding.number = vm.studentId.value.toString()
+        //binding.textView8.text = vm.studentId.value.toString()
     }
 
-    fun showAdpater(){
+    fun successGetData() {
+        vm.getUserName.observe(this,{
+            binding.name = vm.getUserName.value!!
+            binding.number = vm.getDataInfo.value!!.gcn.toString()
+            binding.nameNumber = vm.getDataInfo.value!!.roomId.toString() + "호 " + vm.getDataInfo.value!!.bed
+            //binding.number = vm.getUserNumber.value!!
+        })
+    }
 
+    fun getCleanData(){
+        vm.run {
+            getDataInfo.observe(this@CheckResultActivity,{
+                weekCleanAdapter.setItem()
+            })
+        }
     }
 
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
