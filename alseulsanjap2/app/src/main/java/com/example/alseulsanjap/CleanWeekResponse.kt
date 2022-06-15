@@ -14,6 +14,6 @@ data class CleanWeekResponse(
         val shoes : Int,
         val bedding : Int,
         val clothes : Int,
-        val personalplace : Boolean
+        val personalplace : Int
     )
 }

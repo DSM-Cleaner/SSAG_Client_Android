@@ -36,6 +36,7 @@ class CertificationViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
+
 //    fun textWatcher() {
 //        editText.addTextChangedListener(object : TextWatcher {
 //            // text watcher methods will be called when the text is changed
@@ -70,9 +71,9 @@ class CertificationViewModel : ViewModel() {
 
                     _doneLogin.value = true
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
-                    prefs.setInt("id",response.body()!!.id)
+                    prefs.saveInfo(response.body()!!.id.toString(),"id")
+                    Log.e(prefs.getInfo("id"),"안되면 나 죽어")
 
-                    Log.e(prefs.getInt("id",0),"제발제발제발")
 
                 }
             }
