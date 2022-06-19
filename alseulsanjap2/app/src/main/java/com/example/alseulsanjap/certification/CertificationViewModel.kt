@@ -73,8 +73,6 @@ class CertificationViewModel : ViewModel() {
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
                     prefs.saveInfo(response.body()!!.id.toString(),"id")
                     Log.e(prefs.getInfo("id"),"안되면 나 죽어")
-
-
                 }
             }
             else

@@ -26,6 +26,7 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
 
         vm.getCleanInfo()
         successGetData()
+        showRV()
 
 //        binding.viewPager2.adapter =
 //            binding.viewager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -34,22 +35,23 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
         //binding.textView8.text = vm.studentId.value.toString()
     }
 
+    private fun showRV(){
+        binding.viewPager2.adapter = weekCleanAdapter
+        binding.notifyChange()
+
+        binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+    }
+
+
     fun successGetData() {
         vm.getUserName.observe(this,{
             binding.name = vm.getUserName.value!!
             binding.number = vm.getDataInfo.value!!.gcn.toString()
             binding.nameNumber = vm.getDataInfo.value!!.roomId.toString() + "호 " + vm.getDataInfo.value!!.bed
-            //binding.number = vm.getUserNumber.value!!
         })
     }
 
-    fun getCleanData(){
-        vm.run {
-            getDataInfo.observe(this@CheckResultActivity,{
-                weekCleanAdapter.setItem()
-            })
-        }
-    }
 
     inner class ZoomOutPageTransformer : ViewPager2.PageTransformer {
         override fun transformPage(view: View, position: Float) {

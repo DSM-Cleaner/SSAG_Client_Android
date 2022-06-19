@@ -1,17 +1,21 @@
 package com.example.alseulsanjap
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alseulsanjap.checkresult.CheckResultViewModel
+import com.example.alseulsanjap.databinding.ActivityCertificationBinding.bind
 import com.example.alseulsanjap.databinding.CleanCheckBoxBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class WeekCleanAdapter(private val viewModel: CheckResultViewModel) :
+class WeekCleanAdapter(
+    private val viewModel: CheckResultViewModel
+) :
     RecyclerView.Adapter<WeekCleanAdapter.WeekCleanViewHolder>() {
 
-    private var userProjectList = ArrayList<CleanWeekResponse>()
+    private var items = ArrayList<CleanWeekResponse>()
 
     inner class WeekCleanViewHolder(private val binding: CleanCheckBoxBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -21,12 +25,14 @@ class WeekCleanAdapter(private val viewModel: CheckResultViewModel) :
             val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
             val formatted = current.format(formatter)
 
-            binding.shoesTv.text = item.results[position]!!.bedding.toString()
-            binding.concentTv.text = item.results[position]!!.plug.toString()
+            //binding.shoesTv.text = item.results[position]!!.bedding.toString()
+            //binding.concentTv.text = item.results[position]!!.plug.toString()
+            //binding.front = item.results[position]!!.shoes.toString()
             binding.vm = viewModel
             binding.notifyChange()
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekCleanViewHolder {
         val binding = CleanCheckBoxBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,15 +40,16 @@ class WeekCleanAdapter(private val viewModel: CheckResultViewModel) :
     }
 
     override fun onBindViewHolder(holder: WeekCleanViewHolder, position: Int) {
-        holder.bind(userProjectList)
+        holder.bind(items[position],position)
     }
 
     override fun getItemCount(): Int {
-        return userProjectList.size
+        return items.size
     }
 
-    fun setItem(projects: ArrayList<CleanWeekResponse>) {
-        this.userProjectList = projects
+    fun setItem(item: ArrayList<CleanWeekResponse>) {
+        this.items = item
         notifyDataSetChanged()
     }
+
 }

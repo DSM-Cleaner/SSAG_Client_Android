@@ -44,6 +44,9 @@ class CheckResultViewModel : ViewModel() {
     private val _getDataInfo: MutableLiveData<CleanWeekResponse> = MutableLiveData()
     val getDataInfo  = _getDataInfo
 
+    private val _getDetailDataInfo: MutableLiveData<CleanWeekResponse.WeekDetail> = MutableLiveData()
+    val getDetailDataInfo  = _getDetailDataInfo
+
     private val _getUserName : MutableLiveData<String> = MutableLiveData()
     val getUserName = _getUserName
 
@@ -62,16 +65,12 @@ class CheckResultViewModel : ViewModel() {
                 if (response.code() == 200) {
                     _doneGetInfo.value = true
                     _getDataInfo.postValue(response.body())
-
                     _getUserName.postValue(response.body()!!.name)
-
-                    _getDataInfo.value!!.results[0].bedding
 
                     //날짜 가지고 오기
                     val onlyDate: LocalDate = LocalDate.now()
                     println("Current date: $onlyDate")
                     _nowDate.value = onlyDate.toString()
-
 
                 }
                 else
