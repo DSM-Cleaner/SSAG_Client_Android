@@ -38,8 +38,11 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
     private fun showRV(){
         binding.viewPager2.adapter = weekCleanAdapter
         binding.notifyChange()
-
         binding.viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        vm.getDataInfo.observe(this,{
+            weekCleanAdapter.setItem(it.results)
+        })
+
 
     }
 

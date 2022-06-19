@@ -44,14 +44,8 @@ class CheckResultViewModel : ViewModel() {
     private val _getDataInfo: MutableLiveData<CleanWeekResponse> = MutableLiveData()
     val getDataInfo  = _getDataInfo
 
-    private val _getDetailDataInfo: MutableLiveData<CleanWeekResponse.WeekDetail> = MutableLiveData()
-    val getDetailDataInfo  = _getDetailDataInfo
-
     private val _getUserName : MutableLiveData<String> = MutableLiveData()
     val getUserName = _getUserName
-
-    private var userName : String = ""
-
 
     fun getCleanInfo() {
         viewModelScope.launch {
@@ -66,8 +60,7 @@ class CheckResultViewModel : ViewModel() {
                     _doneGetInfo.value = true
                     _getDataInfo.postValue(response.body())
                     _getUserName.postValue(response.body()!!.name)
-
-                    //날짜 가지고 오기
+                    
                     val onlyDate: LocalDate = LocalDate.now()
                     println("Current date: $onlyDate")
                     _nowDate.value = onlyDate.toString()
@@ -77,12 +70,6 @@ class CheckResultViewModel : ViewModel() {
                     _toastMessage.value = "데이터 로드에 실패하였습니다"
             } else
                 _toastMessage.value = "데이터 로드에 실패하였습니다"
-        }
-
-        fun checkWeekCleanRoom() {
-            viewModelScope.launch {
-
-            }
         }
     }
 
