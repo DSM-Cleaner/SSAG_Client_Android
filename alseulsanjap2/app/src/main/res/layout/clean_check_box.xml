@@ -9,28 +9,16 @@
             type="com.example.alseulsanjap.checkresult.CheckResultViewModel"
             />
 
-        <variable
-            name="date"
-            type="String"
-            />
-        <variable
-            name="front"
-            type="String"
-            />
-        <variable
-            name="Date"
-            type="String"
-            />
     </data>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/clean_cv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="15dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
@@ -56,9 +44,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="@{date}"
                         android:textColor="@color/color_light_blue"
                         android:textStyle="bold"
+                        android:text="@string/self"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,7 +81,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:text="@{front}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -248,7 +235,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@{Date}"
                     android:textColor="@color/color_dark_blue"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

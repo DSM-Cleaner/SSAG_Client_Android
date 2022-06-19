@@ -10,4 +10,5 @@
     <string name="incorrect_code">고유코드가 일치하지 않습니다.</string>
     <string name="clean_result">청소 결과 확인</string>
     <string name="week_check_result">이번 주 청소 결과</string>
+    <string name="self">개인</string>
 </resources>

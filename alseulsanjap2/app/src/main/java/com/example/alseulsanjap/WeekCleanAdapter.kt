@@ -15,19 +15,18 @@ class WeekCleanAdapter(
 ) :
     RecyclerView.Adapter<WeekCleanAdapter.WeekCleanViewHolder>() {
 
-    private var items = ArrayList<CleanWeekResponse>()
+    private var items = ArrayList<CleanWeekResponse.WeekDetail>()
 
     inner class WeekCleanViewHolder(private val binding: CleanCheckBoxBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CleanWeekResponse, position: Int) {
+        fun bind(item: CleanWeekResponse.WeekDetail, position: Int) {
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
             val formatted = current.format(formatter)
 
-            //binding.shoesTv.text = item.results[position]!!.bedding.toString()
-            //binding.concentTv.text = item.results[position]!!.plug.toString()
-            //binding.front = item.results[position]!!.shoes.toString()
+            binding.textView6.text = formatted
+
             binding.vm = viewModel
             binding.notifyChange()
         }
@@ -47,7 +46,7 @@ class WeekCleanAdapter(
         return items.size
     }
 
-    fun setItem(item: ArrayList<CleanWeekResponse>) {
+    fun setItem(item: ArrayList<CleanWeekResponse.WeekDetail>) {
         this.items = item
         notifyDataSetChanged()
     }
