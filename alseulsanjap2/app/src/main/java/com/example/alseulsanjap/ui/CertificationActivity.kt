@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isInvisible
 import com.example.alseulsanjap.BaseActivity
 import com.example.alseulsanjap.R
 import com.example.alseulsanjap.certification.CertificationViewModel
@@ -63,7 +64,8 @@ class CertificationActivity :
 
     private fun failCertification() {
         if (vm.failCertification.value == false) {
-            binding.textView5.visibility
+            binding.textView5.isInvisible
+            binding.button.isInvisible
         }
     }
 }
