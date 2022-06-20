@@ -36,30 +36,19 @@ class CertificationViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-
-//    fun textWatcher() {
-//        editText.addTextChangedListener(object : TextWatcher {
-//            // text watcher methods will be called when the text is changed
-//            override fun beforeTextChanged(
-//                p0: CharSequence?,
-//                p1: Int, p2: Int, p3: Int
-//            ) {
-//                // do something before text changed
-//            }
-//
-//            override fun onTextChanged(
-//                p0: CharSequence?,
-//                p1: Int, p2: Int, p3: Int
-//            ) {
-//                // do something on text changed
-//                textView.text = "On text changed\n\n$p0"
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                // do something after text changed
-//            }
-//        }
-//    }
+    fun autoLogin(){
+        viewModelScope.launch {
+            val response =
+                certificationRespository.doCertification(CertificationRequest(prefs.getInfo("userCode")))
+            if (response.isSuccessful) {
+                if (response.code() == 200) {
+                    _doneLogin.value = true
+                }
+            }
+            else
+                _failCertification.value = false
+        }
+    }
 
     fun checkCertificationCode() {
         viewModelScope.launch {
@@ -69,6 +58,7 @@ class CertificationViewModel : ViewModel() {
                 if (response.code() == 200) {
                     _toastMessage.value = "인증에 성공하였습니다."
 
+                    prefs.saveInfo(userCode.value!!,"usercode")
                     _doneLogin.value = true
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
                     prefs.saveInfo(response.body()!!.id.toString(),"id")
