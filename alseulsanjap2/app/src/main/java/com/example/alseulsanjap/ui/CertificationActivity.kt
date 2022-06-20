@@ -6,6 +6,7 @@ import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.alseulsanjap.BaseActivity
 import com.example.alseulsanjap.R
 import com.example.alseulsanjap.certification.CertificationViewModel
@@ -23,17 +24,17 @@ class CertificationActivity :
 
         successCertification()
         failCertification()
+        doLogin()
+        //vm.autoLogin()
     }
 
     fun showFragment() {
         val successFragment = SuccessFragment()
-        //supportFragmentManager.beginTransaction().replace(R.id.certification_container,successFragment)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.certification_container, successFragment)
+        binding.button.isInvisible
         transaction.commit()
-
         intentActivity()
-
     }
 
     private fun intentActivity() {
@@ -51,6 +52,12 @@ class CertificationActivity :
         private const val DURATION: Long = 2500
     }
 
+    private fun doLogin(){
+        binding.button.setOnClickListener(){
+            vm.checkCertificationCode()
+        }
+    }
+
 
     private fun successCertification() {
         vm.doneLogin.observe(this, {
@@ -64,7 +71,7 @@ class CertificationActivity :
 
     private fun failCertification() {
         if (vm.failCertification.value == false) {
-            binding.textView5.isInvisible
+            binding.wrong = vm.toastMessage.value!!
             binding.button.isInvisible
         }
     }

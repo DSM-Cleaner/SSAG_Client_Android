@@ -1,26 +1,25 @@
 package com.example.alseulsanjap.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.ViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.example.alseulsanjap.BaseActivity
 import com.example.alseulsanjap.R
-import com.example.alseulsanjap.WeekCleanAdapter
 import com.example.alseulsanjap.checkresult.CheckResultViewModel
 import com.example.alseulsanjap.databinding.ActivityCheckResultBinding
-import com.google.android.material.tabs.TabLayoutMediator
+import com.example.alseulsanjap.di.SsagApplication.Companion.context
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.core.content.ContextCompat
-import java.security.AccessController.getContext
 
 
 class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.activity_check_result) {
 
     override val vm: CheckResultViewModel by viewModel()
     private val weekCleanAdapter by lazy { WeekCleanAdapter(vm) }
+
+    private val green = context.resources.getColor(R.color.color_green)
+    private val red = context.resources.getColor(R.color.red)
+    private val black = context.resources.getColor(R.color.black)
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다
@@ -49,7 +48,18 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
 
     fun weekCleanCheck(){
         vm.countWeek.observe(this,{
-            binding.countWeek.text = vm.countWeek.value
+            Log.e(vm.countWeek.value!!,"청소를 어따구로 하는거")
+
+            if(vm.countWeek.value == "양호"){
+                binding.countWeek.text = vm.countWeek.value
+                binding.countWeek.setTextColor(green)
+            }
+            else if(vm.countWeek.value.equals("불량")){
+                binding.countWeek.text = vm.countWeek.value
+                binding.countWeek.setTextColor(red)
+            }
+            else
+                binding.countWeek.text = vm.countWeek.value
         })
     }
 
