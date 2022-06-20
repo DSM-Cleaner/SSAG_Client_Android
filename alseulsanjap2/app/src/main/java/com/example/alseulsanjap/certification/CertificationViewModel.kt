@@ -67,6 +67,7 @@ class CertificationViewModel : ViewModel() {
             }
             else
                 _failCertification.value = false
+                _toastMessage.value = "인증번호가 틀렸습니다."
 
         }
     }
