@@ -11,7 +11,11 @@ import com.example.alseulsanjap.R
 import com.example.alseulsanjap.WeekCleanAdapter
 import com.example.alseulsanjap.checkresult.CheckResultViewModel
 import com.example.alseulsanjap.databinding.ActivityCheckResultBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.core.content.ContextCompat
+import java.security.AccessController.getContext
+
 
 class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.activity_check_result) {
 
@@ -27,12 +31,8 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
         vm.getCleanInfo()
         successGetData()
         showRV()
+        weekCleanCheck()
 
-//        binding.viewPager2.adapter =
-//            binding.viewager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-//        binding.viewPager2.setPageTransformer(ZoomOutPageTransformer())
-//        binding.number = vm.studentId.value.toString()
-        //binding.textView8.text = vm.studentId.value.toString()
     }
 
     private fun showRV(){
@@ -42,8 +42,15 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
         vm.getDataInfo.observe(this,{
             weekCleanAdapter.setItem(it.results)
         })
+        //val dotsIndicator = binding.dotsIndicator
+//        TabLayoutMediator(dotsIndicator, binding.viewPager2) { _, _ ->
+//        }.attach()
+    }
 
-
+    fun weekCleanCheck(){
+        vm.countWeek.observe(this,{
+            binding.countWeek.text = vm.countWeek.value
+        })
     }
 
 
@@ -51,7 +58,9 @@ class CheckResultActivity : BaseActivity<ActivityCheckResultBinding>(R.layout.ac
         vm.getUserName.observe(this,{
             binding.name = vm.getUserName.value!!
             binding.number = vm.getDataInfo.value!!.gcn.toString()
-            binding.nameNumber = vm.getDataInfo.value!!.roomId.toString() + "호 " + vm.getDataInfo.value!!.bed
+            val result =vm.getDataInfo.value!!.roomId.toString() + "호 " + vm.getDataInfo.value!!.bed
+            Log.e(result,"결과 결과 결과")
+            binding.nameNumber = result
         })
     }
 

@@ -47,6 +47,9 @@ class CheckResultViewModel : ViewModel() {
     private val _getUserName : MutableLiveData<String> = MutableLiveData()
     val getUserName = _getUserName
 
+    private val _countWeek = MutableLiveData<String>()
+    val countWeek = _countWeek
+
     fun getCleanInfo() {
         viewModelScope.launch {
             val studentId = prefs.getInfo("id")
@@ -60,7 +63,7 @@ class CheckResultViewModel : ViewModel() {
                     _doneGetInfo.value = true
                     _getDataInfo.postValue(response.body())
                     _getUserName.postValue(response.body()!!.name)
-                    
+
                     val onlyDate: LocalDate = LocalDate.now()
                     println("Current date: $onlyDate")
                     _nowDate.value = onlyDate.toString()
