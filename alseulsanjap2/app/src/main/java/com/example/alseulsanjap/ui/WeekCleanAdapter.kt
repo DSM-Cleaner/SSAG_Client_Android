@@ -36,50 +36,61 @@ class WeekCleanAdapter(
             if (item.bedding.equals(1)) {
                 binding.frontTv.text = "통과"
                 binding.frontTv.setTextColor(green)
-            } else binding.frontTv.text = "불통과"
+            } else if (item.bedding.equals(0)) {
+                binding.frontTv.text = "불통과"
                 binding.frontTv.setTextColor(red)
                 list.add(1)
-
+            }
 
             if (item.clothes.equals(1)) {
                 binding.personalTv.text = "통과"
                 binding.personalTv.setTextColor(green)
-            } else
+            } else if (item.clothes.equals(0)) {
                 binding.personalTv.text = "불통과"
-                list.add(1)
                 binding.personalTv.setTextColor(red)
+                list.add(1)
+            }
+
 
             if (item.light.equals(1)) {
                 binding.lightTv.text = "통과"
                 binding.lightTv.setTextColor(green)
-            } else
+            } else if (item.light.equals(0)) {
                 binding.lightTv.text = "불통과"
                 list.add(1)
                 binding.lightTv.setTextColor(red)
+            }
+
 
             if (item.plug.equals(1)) {
                 binding.concentTv.text = "통과"
                 binding.concentTv.setTextColor(green)
-            } else
+            } else if (item.plug.equals(0)) {
                 binding.concentTv.text = "불통과"
                 list.add(1)
                 binding.concentTv.setTextColor(red)
+            }
+
 
             if (item.shoes.equals(1)) {
                 binding.shoesTv.text = "통과"
                 binding.shoesTv.setTextColor(green)
-            } else
+            } else if (item.shoes.equals(0)) {
                 binding.shoesTv.text = "불통과"
                 list.add(1)
                 binding.shoesTv.setTextColor(red)
+            }
+
 
             if (item.personalplace.equals(1)) {
                 binding.selfTv.text = "통과"
                 binding.selfTv.setTextColor(green)
-            } else
+            } else if (item.personalplace.equals(0)) {
                 binding.selfTv.text = "불통과"
                 list.add(1)
                 binding.selfTv.setTextColor(red)
+            }
+
 
 
             Log.e(list.toString(), "countcount")
