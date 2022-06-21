@@ -24,7 +24,6 @@ class CertificationActivity :
 
         successCertification()
         failCertification()
-        doLogin()
         //vm.autoLogin()
     }
 
@@ -51,13 +50,6 @@ class CertificationActivity :
     companion object {
         private const val DURATION: Long = 2500
     }
-
-    private fun doLogin(){
-        binding.button.setOnClickListener(){
-            vm.checkCertificationCode()
-        }
-    }
-
 
     private fun successCertification() {
         vm.doneLogin.observe(this, {
