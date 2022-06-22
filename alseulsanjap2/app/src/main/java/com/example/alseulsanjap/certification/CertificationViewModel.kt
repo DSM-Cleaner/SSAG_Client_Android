@@ -20,9 +20,9 @@ class CertificationViewModel : ViewModel() {
 
     private val certificationRespository = CertificationImpl()
     private val _certificationCode: MutableLiveData<CertificationRequest> = MutableLiveData()
-    private val _response : MutableLiveData<CertificationResponse> = MutableLiveData()
+    private val _response: MutableLiveData<CertificationResponse> = MutableLiveData()
     private val _successCertification: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val _failCertification : MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _failCertification: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val certificationCode = _certificationCode
     val response = _response
@@ -36,7 +36,7 @@ class CertificationViewModel : ViewModel() {
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    fun autoLogin(){
+    fun autoLogin() {
         viewModelScope.launch {
             val response =
                 certificationRespository.doCertification(CertificationRequest(prefs.getInfo("userCode")))
@@ -44,8 +44,7 @@ class CertificationViewModel : ViewModel() {
                 if (response.code() == 200) {
                     _doneLogin.value = true
                 }
-            }
-            else
+            } else
                 _failCertification.value = false
         }
     }
@@ -58,16 +57,13 @@ class CertificationViewModel : ViewModel() {
                 if (response.code() == 200) {
                     _toastMessage.value = "인증에 성공하였습니다."
 
-                    prefs.saveInfo(userCode.value!!,"usercode")
                     _doneLogin.value = true
+                    prefs.saveInfo(userCode.value!!, "usercode")
                     prefs.saveInfo(response.body()!!.authorization, "authorization")
-                    prefs.saveInfo(response.body()!!.id.toString(),"id")
-                    Log.e(prefs.getInfo("id"),"안되면 나 죽어")
+                    prefs.saveInfo(response.body()!!.id.toString(), "id")
                 }
-            }
-            else
-                _failCertification.value = false
-                _toastMessage.value = "인증번호가 틀렸습니다."
+            } else
+                _failCertification.value = true
 
         }
     }

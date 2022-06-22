@@ -31,7 +31,6 @@ class CertificationActivity :
         val successFragment = SuccessFragment()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.certification_container, successFragment)
-        binding.button.isInvisible
         transaction.commit()
         intentActivity()
     }
@@ -54,17 +53,18 @@ class CertificationActivity :
     private fun successCertification() {
         vm.doneLogin.observe(this, {
             if (vm.doneLogin.value == true) {
+                binding.isLoading = true
                 showFragment()
             }
         }
         )
-
     }
 
     private fun failCertification() {
-        if (vm.failCertification.value == false) {
-            binding.wrong = vm.toastMessage.value!!
-            binding.button.isInvisible
-        }
+        vm.failCertification.observe(this,{
+            if (vm.failCertification.value == true) {
+                binding.wrong = "인증번호가 틀렸습니다."
+            }
+        })
     }
 }
